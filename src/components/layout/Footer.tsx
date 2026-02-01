@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Smartphone, Monitor, Wifi, AppWindow, Info, Mail, FileText, Shield, Heart, MessageCircle, Users } from 'lucide-react';
+import { Instagram } from 'lucide-react';
+import unirLogo from '@/assets/unir-logo.png';
 
 const categories = [
   { label: 'Celular', href: '/celular', icon: Smartphone },
@@ -109,9 +111,38 @@ export function Footer() {
 
         {/* Copyright */}
         <div className="text-center pt-8 border-t border-border">
-          <p className="text-sm text-muted-foreground flex items-center justify-center gap-1">
-            © {currentYear} Fix-on. Feito com <Heart className="h-3.5 w-3.5 text-red-500 fill-red-500" /> no Brasil.
-          </p>
+          <div className="flex flex-col items-center gap-4">
+            <p className="text-sm text-muted-foreground flex items-center justify-center gap-1 flex-wrap">
+              © 2026 Fix-on. Feito com <Heart className="h-3.5 w-3.5 text-red-500 fill-red-500" /> pela
+              <a 
+                href="https://www.unityinnovation.com.br/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 hover:text-primary transition-colors"
+              >
+                <img src={unirLogo} alt="UNIR" className="h-5 w-auto inline-block" />
+                UNIR
+              </a>
+            </p>
+            <div className="flex items-center gap-3">
+              <a 
+                href="https://www.unityinnovation.com.br/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-muted-foreground hover:text-primary transition-colors"
+              >
+                <img src={unirLogo} alt="Unity Innovation" className="h-8 w-auto opacity-70 hover:opacity-100 transition-opacity" />
+              </a>
+              <a 
+                href="https://www.instagram.com/unityinnovation/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-muted-foreground hover:text-pink-500 transition-colors"
+              >
+                <Instagram className="h-5 w-5" />
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </footer>
