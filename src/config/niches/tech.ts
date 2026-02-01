@@ -1,4 +1,5 @@
 import { NicheConfig } from './types';
+import { ADSENSE_PUBLISHER_ID, DEFAULT_AFFILIATE_LINKS } from '../monetization';
 
 export const techNiche: NicheConfig = {
   id: 'tech',
@@ -20,10 +21,9 @@ export const techNiche: NicheConfig = {
     ogImage: '/og-tech.png',
   },
   monetization: {
-    adsenseId: 'ca-pub-tech-xxxxxxxxxx',
+    adsenseId: ADSENSE_PUBLISHER_ID,
     affiliateLinks: {
-      amazon: 'https://amazon.com.br/?tag=fixon-tech-20',
-      mercadolivre: 'https://mercadolivre.com.br/?ref=fixon-tech',
+      ...DEFAULT_AFFILIATE_LINKS,
     },
     leadCaptureEnabled: true,
   },

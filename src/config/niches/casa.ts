@@ -1,4 +1,5 @@
 import { NicheConfig } from './types';
+import { ADSENSE_PUBLISHER_ID } from '../monetization';
 
 export const casaNiche: NicheConfig = {
   id: 'casa',
@@ -20,7 +21,7 @@ export const casaNiche: NicheConfig = {
     ogImage: '/og-casa.png',
   },
   monetization: {
-    adsenseId: 'ca-pub-casa-xxxxxxxxxx',
+    adsenseId: ADSENSE_PUBLISHER_ID,
     affiliateLinks: {
       leroymerlin: 'https://leroymerlin.com.br/?ref=fixon-casa',
       telhanorte: 'https://telhanorte.com.br/?ref=fixon-casa',
