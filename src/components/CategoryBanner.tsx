@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Smartphone, Monitor, Wifi, AppWindow, LucideIcon } from 'lucide-react';
+import { Smartphone, Monitor, Wifi, AppWindow, Home, Car, HeartPulse, Wallet, LucideIcon } from 'lucide-react';
 
 interface CategoryBannerProps {
   name: string;
@@ -12,6 +12,10 @@ const iconMap: Record<string, LucideIcon> = {
   computador: Monitor,
   internet: Wifi,
   aplicativos: AppWindow,
+  casa: Home,
+  carro: Car,
+  saude: HeartPulse,
+  financas: Wallet,
 };
 
 const gradientMap: Record<string, string> = {
@@ -19,6 +23,10 @@ const gradientMap: Record<string, string> = {
   computador: 'from-green-500/20 via-green-400/10 to-transparent',
   internet: 'from-purple-500/20 via-purple-400/10 to-transparent',
   aplicativos: 'from-orange-500/20 via-orange-400/10 to-transparent',
+  casa: 'from-amber-500/20 via-amber-400/10 to-transparent',
+  carro: 'from-red-500/20 via-red-400/10 to-transparent',
+  saude: 'from-pink-500/20 via-pink-400/10 to-transparent',
+  financas: 'from-emerald-500/20 via-emerald-400/10 to-transparent',
 };
 
 const iconColorMap: Record<string, string> = {
@@ -26,6 +34,10 @@ const iconColorMap: Record<string, string> = {
   computador: 'text-green-500',
   internet: 'text-purple-500',
   aplicativos: 'text-orange-500',
+  casa: 'text-amber-500',
+  carro: 'text-red-500',
+  saude: 'text-pink-500',
+  financas: 'text-emerald-500',
 };
 
 export function CategoryBanner({ name, slug, description }: CategoryBannerProps) {
