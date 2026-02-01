@@ -4,6 +4,7 @@ import { Footer } from './Footer';
 import { DynamicSEO } from '@/components/DynamicSEO';
 import { NicheSwitcher } from '@/components/NicheSwitcher';
 import { AdSenseScript } from '@/components/ads';
+import { PWAInstallModal } from '@/components/PWAInstallModal';
 
 interface LayoutProps {
   children: ReactNode;
@@ -22,6 +23,7 @@ export function Layout({ children, title, description }: LayoutProps) {
       </main>
       <Footer />
       <NicheSwitcher />
+      <PWAInstallModal />
     </div>
   );
 }
