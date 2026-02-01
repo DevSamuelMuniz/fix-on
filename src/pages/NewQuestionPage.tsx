@@ -1,15 +1,17 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { MessageCircle, User, Mail, ArrowLeft, Send } from 'lucide-react';
+import { MessageCircle, User, Mail, ArrowLeft, Send, Tag, FolderOpen } from 'lucide-react';
 import { z } from 'zod';
 import { Layout } from '@/components/layout/Layout';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
 import { useCreateQuestion } from '@/hooks/useForum';
+import { useCategories } from '@/hooks/useCategories';
 import { Link } from 'react-router-dom';
 
 const questionSchema = z.object({
@@ -19,10 +21,22 @@ const questionSchema = z.object({
   author_email: z.string().email('Email inválido').optional().or(z.literal('')),
 });
 
+const TAGS = [
+  'urgente',
+  'iniciante',
+  'avançado',
+  'dica',
+  'erro',
+  'configuração',
+  'instalação',
+  'atualização',
+];
+
 export default function NewQuestionPage() {
   const navigate = useNavigate();
   const { toast } = useToast();
   const createQuestion = useCreateQuestion();
+  const { data: categories } = useCategories();
   
   const [formData, setFormData] = useState({
     title: '',
@@ -30,6 +44,8 @@ export default function NewQuestionPage() {
     author_name: '',
     author_email: '',
   });
+  const [selectedCategory, setSelectedCategory] = useState<string>('');
+  const [selectedTag, setSelectedTag] = useState<string>('');
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -126,6 +142,49 @@ export default function NewQuestionPage() {
               {errors.description && (
                 <p className="text-sm text-destructive">{errors.description}</p>
               )}
+            </div>
+
+            {/* Filters - Category and Tag */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="category" className="flex items-center gap-2">
+                  <FolderOpen className="h-4 w-4" />
+                  Categoria (filtro)
+                </Label>
+                <Select value={selectedCategory} onValueChange={setSelectedCategory}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Selecione uma categoria" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {categories?.map((cat) => (
+                      <SelectItem key={cat.id} value={cat.slug}>
+                        {cat.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <p className="text-xs text-muted-foreground">Ajuda a organizar, não é obrigatório</p>
+              </div>
+              
+              <div className="space-y-2">
+                <Label htmlFor="tag" className="flex items-center gap-2">
+                  <Tag className="h-4 w-4" />
+                  Tag (filtro)
+                </Label>
+                <Select value={selectedTag} onValueChange={setSelectedTag}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Selecione uma tag" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {TAGS.map((tag) => (
+                      <SelectItem key={tag} value={tag}>
+                        {tag.charAt(0).toUpperCase() + tag.slice(1)}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <p className="text-xs text-muted-foreground">Ajuda a filtrar, não é obrigatório</p>
+              </div>
             </div>
 
             {/* Optional info */}
