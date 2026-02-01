@@ -1,4 +1,5 @@
 import { NicheConfig } from './types';
+import { ADSENSE_PUBLISHER_ID } from '../monetization';
 
 // Default niche for main domain (fixon.com, fixon.lovable.app, localhost)
 export const defaultNiche: NicheConfig = {
@@ -21,7 +22,7 @@ export const defaultNiche: NicheConfig = {
     ogImage: '/og-default.png',
   },
   monetization: {
-    adsenseId: 'ca-pub-default-xxxxxxxxxx',
+    adsenseId: ADSENSE_PUBLISHER_ID,
     affiliateLinks: {},
     leadCaptureEnabled: true,
   },
