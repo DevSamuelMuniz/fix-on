@@ -67,13 +67,14 @@ export function CategoryCard({ name, slug, icon, description, problemCount, inde
       transition={{ delay: index * 0.1, duration: 0.3 }}
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
+      className="h-full"
     >
       <Link
         to={`/${slug}`}
         className={cn(
           'group relative flex flex-col items-center justify-center p-6 rounded-2xl transition-all duration-300',
           'border border-border shadow-sm hover:shadow-lg',
-          'min-h-[160px] touch-action-manipulation overflow-hidden',
+          'min-h-[160px] h-full touch-action-manipulation overflow-hidden',
           colors.bg,
           colors.border
         )}
