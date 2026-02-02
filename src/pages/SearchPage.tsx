@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { Layout } from '@/components/layout/Layout';
 import { SearchBar } from '@/components/SearchBar';
 import { ProblemCard } from '@/components/ProblemCard';
 import { useSearchProblems } from '@/hooks/useProblems';
 import { Skeleton } from '@/components/ui/skeleton';
+import { Button } from '@/components/ui/button';
+import { MessageCircle, Users } from 'lucide-react';
 
 export default function SearchPage() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -20,6 +22,13 @@ export default function SearchPage() {
   const handleSearch = (newQuery: string) => {
     setQuery(newQuery);
     setSearchParams({ q: newQuery });
+  };
+
+  // Build URL for new topic with pre-filled data
+  const getNewTopicUrl = () => {
+    const params = new URLSearchParams();
+    params.set('titulo', query);
+    return `/comunidade/novo-topico?${params.toString()}`;
   };
 
   return (
@@ -54,12 +63,30 @@ export default function SearchPage() {
               </div>
             ) : (
               <div className="text-center py-12">
-                <p className="text-muted-foreground mb-2">
-                  Tente buscar por outros termos como:
-                </p>
-                <p className="text-sm text-muted-foreground">
-                  "celular não liga", "wifi lento", "whatsapp travando"
-                </p>
+                {/* No results - recommend community */}
+                <div className="max-w-md mx-auto bg-gradient-to-br from-purple-500/10 to-purple-600/10 border border-purple-500/30 rounded-2xl p-6">
+                  <div className="w-14 h-14 mx-auto mb-4 bg-purple-500 rounded-full flex items-center justify-center">
+                    <Users className="h-7 w-7 text-white" />
+                  </div>
+                  <h3 className="text-lg font-semibold text-foreground mb-2">
+                    Não encontramos uma solução pronta
+                  </h3>
+                  <p className="text-muted-foreground text-sm mb-6">
+                    Pergunte na nossa comunidade! Outros usuários podem te ajudar a resolver:
+                  </p>
+                  <p className="text-foreground font-medium mb-6 px-4 py-2 bg-background/50 rounded-lg border border-border">
+                    "{query}"
+                  </p>
+                  <Link to={getNewTopicUrl()}>
+                    <Button className="w-full bg-purple-500 hover:bg-purple-600 text-white">
+                      <MessageCircle className="h-4 w-4 mr-2" />
+                      Perguntar na Comunidade
+                    </Button>
+                  </Link>
+                  <p className="text-xs text-muted-foreground mt-4">
+                    A pergunta já vai preenchida para você 😉
+                  </p>
+                </div>
               </div>
             )}
           </>
