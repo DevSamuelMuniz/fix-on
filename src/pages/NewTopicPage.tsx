@@ -30,7 +30,7 @@ export default function NewTopicPage() {
   const { data: categories } = useCategories();
   
   const [formData, setFormData] = useState({
-    title: '',
+    title: searchParams.get('titulo') || '',
     description: '',
     category_id: searchParams.get('categoria') || '',
     images: [] as string[],
