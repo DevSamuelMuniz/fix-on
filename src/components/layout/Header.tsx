@@ -1,63 +1,28 @@
-import { useState, useMemo } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Search, Home, Info, Mail, MessageCircle, Sparkles, User, LogOut, ThumbsUp } from 'lucide-react';
+import { Menu, X, Search, Home, Info, Mail, MessageCircle, User, LogOut, ThumbsUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { useAuth } from '@/hooks/useAuth';
 import { useNiche } from '@/contexts/NicheContext';
 import { toast } from 'sonner';
-import * as LucideIcons from 'lucide-react';
 
-// Dynamic icon resolver
-function getIconComponent(iconName: string) {
-  const iconMap: Record<string, any> = {
-    'smartphone': LucideIcons.Smartphone,
-    'monitor': LucideIcons.Monitor,
-    'wifi': LucideIcons.Wifi,
-    'app-window': LucideIcons.AppWindow,
-    'heart-pulse': LucideIcons.HeartPulse,
-    'apple': LucideIcons.Apple,
-    'sparkles': LucideIcons.Sparkles,
-    'moon': LucideIcons.Moon,
-    'cog': LucideIcons.Cog,
-    'zap': LucideIcons.Zap,
-    'circle-stop': LucideIcons.CircleStop,
-    'circle': LucideIcons.Circle,
-    'droplets': LucideIcons.Droplets,
-    'paintbrush': LucideIcons.Paintbrush,
-    'armchair': LucideIcons.Armchair,
-  };
-  return iconMap[iconName] || LucideIcons.Folder;
-}
+const CONTACT_EMAIL = 'fixon.contato@gmail.com';
 
 export function Header() {
   const [open, setOpen] = useState(false);
   const { user, signOut } = useAuth();
   const { niche } = useNiche();
 
-  // Generate menu items dynamically based on niche categories
-  const menuItems = useMemo(() => {
-    const baseItems = [
-      { label: 'Início', href: '/', icon: Home },
-    ];
-    
-    // Add niche-specific category items
-    const categoryItems = niche.categories.map(category => ({
-      label: category.name,
-      href: `/${category.slug}`,
-      icon: getIconComponent(category.icon),
-    }));
-    
-    // Add static items at the end
-    const staticItems = [
-      { label: 'Sobre', href: '/sobre', icon: Info },
-      { label: 'Contato', href: '/contato', icon: Mail },
-    ];
-    
-    return [...baseItems, ...categoryItems, ...staticItems];
-  }, [niche]);
+  // Static menu items for navigation
+  const menuItems = [
+    { label: 'Início', href: '/', icon: Home },
+    { label: 'Comunidade', href: '/comunidade', icon: MessageCircle },
+    { label: 'Sobre', href: '/sobre', icon: Info },
+    { label: 'Contato', href: '/contato', icon: Mail },
+  ];
 
   const handleSignOut = async () => {
     const { error } = await signOut();
@@ -88,8 +53,8 @@ export function Header() {
         </Link>
 
         {/* Center: Desktop Navigation */}
-        <nav className="hidden lg:flex items-center gap-1">
-          {menuItems.slice(1, 5).map((item) => (
+        <nav className="hidden md:flex items-center gap-1">
+          {menuItems.slice(1).map((item) => (
             <Link
               key={item.href}
               to={item.href}
@@ -99,45 +64,22 @@ export function Header() {
               {item.label}
             </Link>
           ))}
-        </nav>
-
-        {/* Quick Links: Desktop */}
-        <div className="hidden md:flex items-center gap-1">
-          <Link
-            to="/contato"
-            className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-muted-foreground hover:text-primary hover:bg-primary/5 rounded-lg transition-all"
-          >
-            <Mail className="h-4 w-4" />
-            <span className="hidden lg:inline">Contato</span>
-          </Link>
           <Link
             to="/contato?feedback=true"
             className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-muted-foreground hover:text-primary hover:bg-primary/5 rounded-lg transition-all"
           >
             <ThumbsUp className="h-4 w-4" />
-            <span className="hidden lg:inline">Sua Opinião</span>
+            Sua Opinião
           </Link>
-        </div>
+        </nav>
 
-        {/* Right side: Search + Forum + User + Mobile Menu */}
+        {/* Right side: Search + User + Mobile Menu */}
         <div className="flex items-center gap-2">
           <Link to="/buscar">
             <Button variant="ghost" size="icon" className="min-h-10 min-w-10 hover:bg-primary/10">
               <Search className="h-5 w-5" />
               <span className="sr-only">Buscar</span>
             </Button>
-          </Link>
-
-          {/* Highlighted Community Link - Desktop */}
-          <Link to="/comunidade" className="hidden md:block">
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-500 to-purple-600 text-white text-sm font-medium rounded-full shadow-md hover:shadow-lg transition-all"
-            >
-              <MessageCircle className="h-4 w-4" />
-              Comunidade
-            </motion.div>
           </Link>
 
           {/* User Menu */}
