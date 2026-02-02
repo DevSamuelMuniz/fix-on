@@ -1,7 +1,12 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { MessageCircle, Plus, Users, FolderOpen, TrendingUp, Clock, Eye, Pin, ChevronRight } from 'lucide-react';
+import { 
+  MessageCircle, Plus, Users, FolderOpen, TrendingUp, Clock, Eye, Pin, ChevronRight,
+  Smartphone, Monitor, Wifi, AppWindow, HeartPulse, Apple, Sparkles, Moon, Cog, Zap,
+  CircleStop, Circle, Droplets, Paintbrush, Armchair, Car, Wrench, Home, Lightbulb,
+  type LucideIcon
+} from 'lucide-react';
 import { Layout } from '@/components/layout/Layout';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -10,6 +15,34 @@ import { useCategories } from '@/hooks/useCategories';
 import { useForumStats } from '@/hooks/useForum';
 import { useAuth } from '@/hooks/useAuth';
 import { cn } from '@/lib/utils';
+
+// Dynamic icon resolver for category icons
+const iconMap: Record<string, LucideIcon> = {
+  'smartphone': Smartphone,
+  'monitor': Monitor,
+  'wifi': Wifi,
+  'app-window': AppWindow,
+  'heart-pulse': HeartPulse,
+  'apple': Apple,
+  'sparkles': Sparkles,
+  'moon': Moon,
+  'cog': Cog,
+  'zap': Zap,
+  'circle-stop': CircleStop,
+  'circle': Circle,
+  'droplets': Droplets,
+  'paintbrush': Paintbrush,
+  'armchair': Armchair,
+  'car': Car,
+  'wrench': Wrench,
+  'home': Home,
+  'lightbulb': Lightbulb,
+  'folder': FolderOpen,
+};
+
+function getCategoryIcon(iconName: string): LucideIcon {
+  return iconMap[iconName] || FolderOpen;
+}
 
 export default function CommunityPage() {
   const { data: categories, isLoading: loadingCategories } = useCategories();
@@ -102,6 +135,7 @@ export default function CommunityPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {categories.map((category, index) => {
                 const categoryStats = stats?.byCategory?.[category.id];
+                const IconComponent = getCategoryIcon(category.icon);
                 
                 return (
                   <motion.div
@@ -116,10 +150,10 @@ export default function CommunityPage() {
                     >
                       <div className="flex items-start justify-between mb-4">
                         <div 
-                          className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl"
-                          style={{ backgroundColor: `${category.color}20` }}
+                          className="w-12 h-12 rounded-xl flex items-center justify-center"
+                          style={{ backgroundColor: `${category.color}20`, color: category.color }}
                         >
-                          {category.icon}
+                          <IconComponent className="h-6 w-6" />
                         </div>
                         <ChevronRight className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors" />
                       </div>

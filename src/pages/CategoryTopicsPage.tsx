@@ -3,7 +3,10 @@ import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { 
   MessageCircle, Plus, Clock, CheckCircle2, Pin, ChevronRight, 
-  ArrowLeft, Eye, HelpCircle, Users, TrendingUp
+  ArrowLeft, Eye, HelpCircle, Users, TrendingUp, FolderOpen,
+  Smartphone, Monitor, Wifi, AppWindow, HeartPulse, Apple, Sparkles, Moon, Cog, Zap,
+  CircleStop, Circle, Droplets, Paintbrush, Armchair, Car, Wrench, Home, Lightbulb,
+  type LucideIcon
 } from 'lucide-react';
 import { Layout } from '@/components/layout/Layout';
 import { Button } from '@/components/ui/button';
@@ -16,6 +19,34 @@ import { useCategoryBySlug } from '@/hooks/useCategories';
 import { useTopicsByCategory } from '@/hooks/useForum';
 import { useAuth } from '@/hooks/useAuth';
 import { cn } from '@/lib/utils';
+
+// Dynamic icon resolver for category icons
+const iconMap: Record<string, LucideIcon> = {
+  'smartphone': Smartphone,
+  'monitor': Monitor,
+  'wifi': Wifi,
+  'app-window': AppWindow,
+  'heart-pulse': HeartPulse,
+  'apple': Apple,
+  'sparkles': Sparkles,
+  'moon': Moon,
+  'cog': Cog,
+  'zap': Zap,
+  'circle-stop': CircleStop,
+  'circle': Circle,
+  'droplets': Droplets,
+  'paintbrush': Paintbrush,
+  'armchair': Armchair,
+  'car': Car,
+  'wrench': Wrench,
+  'home': Home,
+  'lightbulb': Lightbulb,
+  'folder': FolderOpen,
+};
+
+function getCategoryIcon(iconName: string): LucideIcon {
+  return iconMap[iconName] || FolderOpen;
+}
 
 function formatTimeAgo(dateString: string): string {
   const date = new Date(dateString);
@@ -69,6 +100,8 @@ export default function CategoryTopicsPage() {
     );
   }
 
+  const IconComponent = getCategoryIcon(category.icon);
+
   return (
     <Layout>
       {/* Category Header */}
@@ -85,10 +118,10 @@ export default function CategoryTopicsPage() {
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div className="flex items-center gap-4">
               <div 
-                className="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl"
-                style={{ backgroundColor: `${category.color}20` }}
+                className="w-16 h-16 rounded-2xl flex items-center justify-center"
+                style={{ backgroundColor: `${category.color}20`, color: category.color }}
               >
-                {category.icon}
+                <IconComponent className="h-8 w-8" />
               </div>
               <div>
                 <h1 className="text-2xl md:text-3xl font-bold text-foreground">
