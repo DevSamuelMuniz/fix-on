@@ -11,6 +11,7 @@ import { Layout } from '@/components/layout/Layout';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Badge } from '@/components/ui/badge';
+import { UserAvatar } from '@/components/UserAvatar';
 import { useCategories } from '@/hooks/useCategories';
 import { useForumStats } from '@/hooks/useForum';
 import { useAuth } from '@/hooks/useAuth';
@@ -257,6 +258,13 @@ function RecentTopicsList() {
               <Pin className="h-4 w-4 text-amber-500 flex-shrink-0" />
             )}
             
+            {/* Avatar */}
+            <UserAvatar 
+              name={topic.author_name} 
+              size="sm"
+              className="flex-shrink-0"
+            />
+            
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2 mb-1">
                 <h3 className="font-medium text-foreground group-hover:text-primary transition-colors line-clamp-1">
@@ -269,9 +277,9 @@ function RecentTopicsList() {
                 )}
               </div>
               <div className="flex items-center gap-3 text-xs text-muted-foreground">
-                <span>{topic.category_name}</span>
+                <span className="font-medium text-foreground/80">{topic.author_name || 'Anônimo'}</span>
                 <span>•</span>
-                <span>{topic.author_name || 'Anônimo'}</span>
+                <span>{topic.category_name}</span>
                 <span>•</span>
                 <span className="flex items-center gap-1">
                   <MessageCircle className="h-3 w-3" />

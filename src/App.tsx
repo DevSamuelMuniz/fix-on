@@ -21,6 +21,7 @@ import CommunityPage from "./pages/CommunityPage";
 import CategoryTopicsPage from "./pages/CategoryTopicsPage";
 import TopicDetailPage from "./pages/TopicDetailPage";
 import NewTopicPage from "./pages/NewTopicPage";
+import AllTopicsPage from "./pages/AllTopicsPage";
 import AdminAuth from "./pages/admin/AdminAuth";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminProblems from "./pages/admin/AdminProblems";
@@ -54,7 +55,7 @@ const App = () => (
             
             {/* Community Routes (new) */}
             <Route path="/comunidade" element={<CommunityPage />} />
-            <Route path="/comunidade/todos" element={<ForumPage />} />
+            <Route path="/comunidade/todos" element={<AllTopicsPage />} />
             <Route path="/comunidade/novo-topico" element={<NewTopicPage />} />
             <Route path="/comunidade/topico/:topicId" element={<TopicDetailPage />} />
             <Route path="/comunidade/:categorySlug" element={<CategoryTopicsPage />} />
