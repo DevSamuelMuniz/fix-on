@@ -5,8 +5,8 @@ const testimonials = [
   {
     name: 'Marcos Oliveira',
     city: 'São Paulo, SP',
-    avatar: 'MO',
-    color: 'bg-blue-500',
+    initials: 'MO',
+    colorClass: 'bg-primary',
     problem: 'Wi-Fi caindo toda hora',
     text: 'Meu roteador ficava desconectando a cada hora e eu não sabia o que fazer. Segui os passos aqui e resolvi em menos de 10 minutos. Incrível!',
     rating: 5,
@@ -14,8 +14,8 @@ const testimonials = [
   {
     name: 'Ana Paula Silva',
     city: 'Belo Horizonte, MG',
-    avatar: 'AP',
-    color: 'bg-purple-500',
+    initials: 'AP',
+    colorClass: 'bg-accent',
     problem: 'Celular superaquecendo',
     text: 'Meu celular esquentava muito e a bateria durava nada. As dicas foram diretas ao ponto e funcionaram de verdade. Recomendo pra todo mundo!',
     rating: 5,
@@ -23,8 +23,8 @@ const testimonials = [
   {
     name: 'Ricardo Santos',
     city: 'Curitiba, PR',
-    avatar: 'RS',
-    color: 'bg-green-500',
+    initials: 'RS',
+    colorClass: 'bg-primary',
     problem: 'PC lento demais',
     text: 'Estava quase comprando um computador novo, mas resolvi tentar aqui antes. Ficou muito mais rápido com as dicas de otimização. Salvou meu dinheiro!',
     rating: 5,
@@ -82,7 +82,7 @@ export function Testimonials() {
               {/* Stars */}
               <div className="flex gap-0.5 mb-3">
                 {Array.from({ length: t.rating }).map((_, si) => (
-                  <Star key={si} className="h-4 w-4 fill-amber-400 text-amber-400" />
+                  <Star key={si} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
                 ))}
               </div>
 
@@ -98,8 +98,8 @@ export function Testimonials() {
 
               {/* Author */}
               <div className="flex items-center gap-3">
-                <div className={`w-9 h-9 rounded-full ${t.color} flex items-center justify-center text-white text-xs font-bold shrink-0`}>
-                  {t.avatar}
+                <div className={`w-9 h-9 rounded-full ${t.colorClass} flex items-center justify-center text-primary-foreground text-xs font-bold shrink-0`}>
+                  {t.initials}
                 </div>
                 <div>
                   <p className="text-sm font-semibold text-foreground leading-none">{t.name}</p>
