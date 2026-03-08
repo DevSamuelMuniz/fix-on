@@ -97,6 +97,20 @@ export function Header() {
             <ThumbsUp className="h-4 w-4" />
             Sua Opinião
           </Link>
+
+          {/* Premium CTA */}
+          {!isPremium && (
+            <Link to="/premium">
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="flex items-center gap-1.5 px-3 py-1.5 bg-gradient-to-r from-amber-500 to-orange-500 text-white text-xs font-semibold rounded-full shadow hover:shadow-md transition-all"
+              >
+                <Crown className="h-3.5 w-3.5" />
+                Premium
+              </motion.div>
+            </Link>
+          )}
         </nav>
 
         {/* Right side: Search + Notifications + User + Mobile Menu */}
