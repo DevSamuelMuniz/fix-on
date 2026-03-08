@@ -93,6 +93,7 @@ const App = () => (
             <Route path="/admin/problemas/novo" element={<AdminProblemForm />} />
             <Route path="/admin/problemas/:problemId" element={<AdminProblemForm />} />
             <Route path="/admin/categorias" element={<AdminCategories />} />
+            <Route path="/admin/mensagens" element={<AdminMessages />} />
             
             {/* Dynamic Routes - Must be last */}
             <Route path="/:categorySlug" element={<CategoryPage />} />
