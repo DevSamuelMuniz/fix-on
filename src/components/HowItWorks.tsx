@@ -1,5 +1,6 @@
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Search, CheckCircle2, PartyPopper } from 'lucide-react';
+import { Search, CheckCircle2, PartyPopper, ArrowRight } from 'lucide-react';
 
 const steps = [
   {
@@ -76,7 +77,7 @@ export function HowItWorks() {
           className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto relative"
         >
           {/* Connection line (desktop only) */}
-          <div className="hidden md:block absolute top-16 left-[20%] right-[20%] h-0.5 bg-gradient-to-r from-blue-500/30 via-green-500/30 to-purple-500/30" />
+          <div className="hidden md:block absolute top-16 left-[20%] right-[20%] h-0.5 bg-gradient-to-r from-primary/30 via-primary/20 to-primary/30" />
 
           {steps.map((step, index) => (
             <motion.div
@@ -99,6 +100,22 @@ export function HowItWorks() {
               <p className="text-muted-foreground max-w-[200px]">{step.description}</p>
             </motion.div>
           ))}
+        </motion.div>
+
+        {/* CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.4, duration: 0.5 }}
+          className="text-center mt-10"
+        >
+          <Link to="/#busca">
+            <button className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground font-semibold rounded-full shadow-md hover:opacity-90 transition-opacity">
+              Resolver agora
+              <ArrowRight className="h-4 w-4" />
+            </button>
+          </Link>
         </motion.div>
       </div>
     </section>
