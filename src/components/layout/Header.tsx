@@ -24,7 +24,7 @@ export function Header() {
   const menuItems = [
     { label: 'Soluções', href: '/', icon: Search },
     { label: 'Comunidade', href: '/comunidade', icon: MessageCircle },
-    { label: 'Guias', href: '/guias', icon: ThumbsUp },
+    { label: 'Guias', href: '/guias', icon: BookOpen },
     { label: 'Sobre', href: '/sobre', icon: Info },
     { label: 'Contato', href: '/contato', icon: Mail },
   ];
