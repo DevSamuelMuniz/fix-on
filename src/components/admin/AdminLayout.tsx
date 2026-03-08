@@ -1,6 +1,6 @@
 import { ReactNode, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { LayoutDashboard, FileText, FolderOpen, LogOut, Home } from 'lucide-react';
+import { LayoutDashboard, FileText, FolderOpen, LogOut, Home, Mail } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
 import { Button } from '@/components/ui/button';
 import logo from '@/assets/logo.png';
