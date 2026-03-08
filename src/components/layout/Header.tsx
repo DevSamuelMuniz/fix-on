@@ -8,6 +8,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSepara
 import { UserAvatar } from '@/components/UserAvatar';
 import { useAuth } from '@/hooks/useAuth';
 import { useNiche } from '@/contexts/NicheContext';
+import { NotificationBell } from '@/components/layout/NotificationBell';
 import { toast } from 'sonner';
 
 const CONTACT_EMAIL = 'fixon.contato@gmail.com';

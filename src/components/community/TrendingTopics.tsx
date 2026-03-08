@@ -53,9 +53,9 @@ export function TrendingTopics() {
           {/* Rank number */}
           <div className={`
             flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold
-            ${index === 0 ? 'bg-amber-500 text-white' : 
-              index === 1 ? 'bg-zinc-400 text-white' : 
-              index === 2 ? 'bg-amber-700 text-white' : 
+          ${index === 0 ? 'bg-amber-500 text-white' :
+              index === 1 ? 'bg-muted-foreground/60 text-white' :
+              index === 2 ? 'bg-amber-700/80 text-white' :
               'bg-muted text-muted-foreground'}
           `}>
             {index + 1}
