@@ -13,6 +13,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
 import { AdInArticle, AdSidebar } from '@/components/ads';
+import { HowToJsonLd } from '@/components/HowToJsonLd';
 
 export default function ProblemPage() {
   const { categorySlug, problemSlug } = useParams<{ categorySlug: string; problemSlug: string }>();
