@@ -23,6 +23,7 @@ export function AdminLayout({ children, title }: AdminLayoutProps) {
   const { user, isAdmin, loading, signOut } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+  const unreadCount = useUnreadMessages();
 
   useEffect(() => {
     if (!loading && (!user || !isAdmin)) {
