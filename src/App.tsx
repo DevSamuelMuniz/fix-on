@@ -36,6 +36,7 @@ import ResetPasswordPage from "./pages/ResetPasswordPage";
 import NewPasswordPage from "./pages/NewPasswordPage";
 import PricingPage from "./pages/PricingPage";
 import PremiumSuccessPage from "./pages/PremiumSuccessPage";
+import GuidesPage from "./pages/GuidesPage";
 
 const queryClient = new QueryClient({
   defaultOptions: {
