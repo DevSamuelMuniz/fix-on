@@ -12,7 +12,7 @@ import { UserAvatar } from '@/components/UserAvatar';
 import { useForumQuestions, ForumFilters } from '@/hooks/useForum';
 import { useCategories } from '@/hooks/useCategories';
 import { cn } from '@/lib/utils';
-import { AdInFeed } from '@/components/ads';
+import { AdInFeed } from '@/components/promo';
 import React from 'react';
 
 const statusConfig = {
