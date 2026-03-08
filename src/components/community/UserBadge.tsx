@@ -92,6 +92,12 @@ const badgeConfigs: Record<BadgeType, BadgeConfig> = {
     color: 'text-red-500',
     bgColor: 'bg-red-500/10',
   },
+  premium: {
+    icon: Crown,
+    label: 'Premium',
+    color: 'text-amber-600',
+    bgColor: 'bg-amber-500/15',
+  },
 };
 
 interface UserBadgeProps {

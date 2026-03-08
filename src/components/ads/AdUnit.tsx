@@ -41,7 +41,8 @@ export function AdUnit({ format, slot, className, responsive = true }: AdUnitPro
     }
   }, [adsenseId]);
 
-  if (!adsenseId) {
+  // Premium users see no ads
+  if (!adsenseId || isPremium) {
     return null;
   }
 
