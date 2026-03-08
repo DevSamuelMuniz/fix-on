@@ -80,6 +80,51 @@ export type Database = {
         }
         Relationships: []
       }
+      digital_guides: {
+        Row: {
+          category: string
+          cover_image_url: string | null
+          created_at: string
+          description: string | null
+          file_path: string | null
+          id: string
+          is_published: boolean
+          price_cents: number
+          stripe_price_id: string
+          stripe_product_id: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          category?: string
+          cover_image_url?: string | null
+          created_at?: string
+          description?: string | null
+          file_path?: string | null
+          id?: string
+          is_published?: boolean
+          price_cents: number
+          stripe_price_id: string
+          stripe_product_id: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          category?: string
+          cover_image_url?: string | null
+          created_at?: string
+          description?: string | null
+          file_path?: string | null
+          id?: string
+          is_published?: boolean
+          price_cents?: number
+          stripe_price_id?: string
+          stripe_product_id?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       forum_answers: {
         Row: {
           author_name: string | null
@@ -243,6 +288,47 @@ export type Database = {
             columns: ["answer_id"]
             isOneToOne: false
             referencedRelation: "forum_answers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      guide_purchases: {
+        Row: {
+          created_at: string
+          guide_id: string
+          id: string
+          status: string
+          stripe_payment_intent_id: string | null
+          stripe_session_id: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          guide_id: string
+          id?: string
+          status?: string
+          stripe_payment_intent_id?: string | null
+          stripe_session_id?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          guide_id?: string
+          id?: string
+          status?: string
+          stripe_payment_intent_id?: string | null
+          stripe_session_id?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "guide_purchases_guide_id_fkey"
+            columns: ["guide_id"]
+            isOneToOne: false
+            referencedRelation: "digital_guides"
             referencedColumns: ["id"]
           },
         ]
