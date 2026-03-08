@@ -11,7 +11,7 @@ import { useCategoryBySlug } from '@/hooks/useCategories';
 import { useProblems } from '@/hooks/useProblems';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Button } from '@/components/ui/button';
-import { AdBanner, AdInFeed } from '@/components/ads';
+import { AdBanner, AdInFeed } from '@/components/promo';
 
 export default function CategoryPage() {
   const { categorySlug } = useParams<{ categorySlug: string }>();
