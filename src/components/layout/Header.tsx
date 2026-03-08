@@ -158,6 +158,21 @@ export function Header() {
                     Meu Perfil
                   </Link>
                 </DropdownMenuItem>
+                {isPremium ? (
+                  <DropdownMenuItem asChild>
+                    <Link to="/premium" className="flex items-center gap-2 cursor-pointer text-amber-600">
+                      <Crown className="h-4 w-4" />
+                      Minha assinatura ⭐
+                    </Link>
+                  </DropdownMenuItem>
+                ) : (
+                  <DropdownMenuItem asChild>
+                    <Link to="/premium" className="flex items-center gap-2 cursor-pointer font-semibold text-amber-600">
+                      <Crown className="h-4 w-4" />
+                      Assinar Premium
+                    </Link>
+                  </DropdownMenuItem>
+                )}
                 <DropdownMenuSeparator />
                 <DropdownMenuItem onClick={handleSignOut} className="flex items-center gap-2 cursor-pointer text-destructive">
                   <LogOut className="h-4 w-4" />
