@@ -262,7 +262,7 @@ export default function AuthPage() {
               </div>
               <div>
                 <div className="flex items-center gap-1 mb-0.5">
-                  {[...Array(5)].map((_, i) => <Star key={i} className="h-3 w-3 fill-yellow-300 text-yellow-300" />)}
+                  {[...Array(5)].map((_, i) => <Star key={i} className="h-3 w-3 fill-primary-foreground/80 text-primary-foreground/80" />)}
                 </div>
                 <p className="text-white/80 text-xs leading-snug">"{t.text}"</p>
                 <p className="text-white/45 text-xs mt-0.5">{t.name} · {t.city}</p>
