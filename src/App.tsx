@@ -30,6 +30,7 @@ import AdminProblemForm from "./pages/admin/AdminProblemForm";
 import AdminMessages from "./pages/admin/AdminMessages";
 import AuthPage from "./pages/AuthPage";
 import ProfilePage from "./pages/ProfilePage";
+import PublicProfilePage from "./pages/PublicProfilePage";
 import InstallPage from "./pages/InstallPage";
 import ResetPasswordPage from "./pages/ResetPasswordPage";
 import NewPasswordPage from "./pages/NewPasswordPage";
