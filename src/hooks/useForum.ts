@@ -41,6 +41,7 @@ export interface ForumStats {
     id: string;
     title: string;
     author_name: string | null;
+    user_id: string | null;
     status: string;
     answer_count: number;
     view_count: number;
@@ -81,7 +82,7 @@ export function useForumStats() {
       // Get recent topics with category
       const { data: recentTopics } = await supabase
         .from('forum_questions')
-        .select('id, title, author_name, status, answer_count, view_count, is_pinned, category:categories(name)')
+        .select('id, title, author_name, user_id, status, answer_count, view_count, is_pinned, category:categories(name)')
         .order('is_pinned', { ascending: false })
         .order('last_activity_at', { ascending: false })
         .limit(10);
@@ -109,6 +110,7 @@ export function useForumStats() {
         byCategory,
         recentTopics: (recentTopics || []).map((t: any) => ({
           ...t,
+          user_id: t.user_id || null,
           category_name: t.category?.name || 'Sem categoria',
         })),
       };

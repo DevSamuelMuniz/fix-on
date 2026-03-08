@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Search, Info, Mail, MessageCircle, User, LogOut, ThumbsUp, Crown } from 'lucide-react';
+import { Menu, X, Search, Info, Mail, MessageCircle, User, LogOut, ThumbsUp, Crown, BookOpen } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
@@ -24,6 +24,7 @@ export function Header() {
   const menuItems = [
     { label: 'Soluções', href: '/', icon: Search },
     { label: 'Comunidade', href: '/comunidade', icon: MessageCircle },
+    { label: 'Guias', href: '/guias', icon: BookOpen },
     { label: 'Sobre', href: '/sobre', icon: Info },
     { label: 'Contato', href: '/contato', icon: Mail },
   ];
