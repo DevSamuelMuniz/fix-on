@@ -53,6 +53,27 @@ const emailSchema = z.string().email('Email inválido');
 const passwordSchema = z.string().min(6, 'Senha deve ter no mínimo 6 caracteres');
 const phoneSchema = z.string().regex(/^\(\d{2}\) \d{4,5}-\d{4}$/, 'Telefone inválido').optional().or(z.literal(''));
 
+function PasswordStrengthBar({ password }: { password: string }) {
+  const segments = [
+    { threshold: 6, weak: true },
+    { threshold: 8, weak: true },
+    { threshold: 10, weak: false },
+    { threshold: 12, weak: false },
+  ];
+  return (
+    <div className="flex gap-1 mt-1.5">
+      {segments.map(({ threshold, weak }, i) => {
+        const active = password.length >= threshold;
+        const cls = active
+          ? weak ? 'bg-destructive' : i === 2 ? 'bg-yellow-400' : 'bg-green-500'
+          : 'bg-muted';
+        return <div key={i} className={`h-1 flex-1 rounded-full transition-colors ${cls}`} />;
+      })}
+    </div>
+  );
+}
+
+
 export default function AuthPage() {
   const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState('');
