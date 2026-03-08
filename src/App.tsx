@@ -30,6 +30,8 @@ import AdminProblemForm from "./pages/admin/AdminProblemForm";
 import AuthPage from "./pages/AuthPage";
 import ProfilePage from "./pages/ProfilePage";
 import InstallPage from "./pages/InstallPage";
+import ResetPasswordPage from "./pages/ResetPasswordPage";
+import NewPasswordPage from "./pages/NewPasswordPage";
 
 const queryClient = new QueryClient({
   defaultOptions: {
