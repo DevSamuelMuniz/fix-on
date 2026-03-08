@@ -441,7 +441,7 @@ export default function AuthPage() {
                       </button>
                     </div>
                     {confirmPassword && confirmPassword === password && (
-                      <p className="text-xs text-green-600 flex items-center gap-1">
+                      <p className="text-xs text-primary flex items-center gap-1">
                         <CheckCircle2 className="h-3 w-3" /> Senhas conferem
                       </p>
                     )}
