@@ -78,21 +78,34 @@ export function AdminLayout({ children, title }: AdminLayoutProps) {
         {/* Sidebar */}
         <aside className="w-64 min-h-[calc(100vh-64px)] bg-card border-r border-border hidden md:block">
           <nav className="p-4 space-y-1">
-            {navItems.map((item) => (
-              <Link
-                key={item.href}
-                to={item.href}
-                className={cn(
-                  'flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors',
-                  location.pathname === item.href
-                    ? 'bg-primary text-primary-foreground'
-                    : 'text-muted-foreground hover:bg-muted hover:text-foreground'
-                )}
-              >
-                <item.icon className="h-4 w-4" />
-                {item.label}
-              </Link>
-            ))}
+            {navItems.map((item) => {
+              const isMensagens = item.href === '/admin/mensagens';
+              return (
+                <Link
+                  key={item.href}
+                  to={item.href}
+                  className={cn(
+                    'flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors',
+                    location.pathname === item.href
+                      ? 'bg-primary text-primary-foreground'
+                      : 'text-muted-foreground hover:bg-muted hover:text-foreground'
+                  )}
+                >
+                  <item.icon className="h-4 w-4 shrink-0" />
+                  <span className="flex-1">{item.label}</span>
+                  {isMensagens && unreadCount > 0 && (
+                    <span className={cn(
+                      'inline-flex items-center justify-center rounded-full text-[10px] font-bold min-w-[18px] h-[18px] px-1',
+                      location.pathname === item.href
+                        ? 'bg-primary-foreground text-primary'
+                        : 'bg-primary text-primary-foreground'
+                    )}>
+                      {unreadCount > 99 ? '99+' : unreadCount}
+                    </span>
+                  )}
+                </Link>
+              );
+            })}
           </nav>
         </aside>
 
