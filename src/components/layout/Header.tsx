@@ -18,6 +18,7 @@ export function Header() {
   const [open, setOpen] = useState(false);
   const { user, profile, signOut } = useAuth();
   const { niche } = useNiche();
+  const { isPremium } = useSubscription();
 
   // Static menu items for navigation
   const menuItems = [
