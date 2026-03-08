@@ -1,47 +1,130 @@
 
+# Plano: Sistema de Anúncios Multi-Nicho
 
-## Monetização da Comunidade FixOn
+## Visão Geral
 
-Analisei o projeto e identifiquei oportunidades de monetização que se encaixam no contexto de uma comunidade de resolução de problemas DIY.
+Implementar um sistema de anúncios Google AdSense integrado à arquitetura multi-tenant, onde cada nicho (tech, health, auto, casa) utiliza seu próprio ID de AdSense e posicionamentos estratégicos de ads.
 
-### Opções viáveis
+---
 
-**1. Plano Premium / Assinatura Mensal**
-- Acesso a conteúdo exclusivo (guias detalhados, vídeos passo-a-passo)
-- Prioridade nas respostas do fórum (tópicos destacados)
-- Sem anúncios (remover AdSense para assinantes)
-- Badge "Premium" no perfil
-- Implementação: Stripe ou Polar para pagamentos recorrentes
+## Componentes a Criar
 
-**2. Créditos de Consulta com IA**
-- Usuário faz perguntas sobre problemas e recebe diagnóstico/resposta via IA (Lovable AI)
-- Gratuito: 3 consultas/mês. Premium: ilimitado
-- Implementação: Edge function + Lovable AI + meter de uso
+### 1. Componente Base de Anúncio
+**Arquivo:** `src/components/ads/AdUnit.tsx`
 
-**3. Loja de Guias Digitais (compra única)**
-- E-books/PDFs com tutoriais completos por categoria (ex: "Guia Completo de Elétrica Residencial")
-- Preço único por guia
-- Implementação: Polar ou Stripe para pagamento + Storage para entrega
+Componente reutilizável que:
+- Carrega o AdSense ID do nicho atual via `useNiche()`
+- Suporta diferentes formatos (banner, retângulo, in-article, sidebar)
+- Renderiza condicionalmente baseado na configuração de monetização
+- Inclui placeholder visual durante carregamento
 
-**4. Destaque de Tópico (boost)**
-- Usuário paga para fixar/destacar seu tópico no topo do fórum por X dias
-- Micro-transação (R$5-15)
+### 2. Componentes Especializados
 
-**5. Selo de Profissional Verificado**
-- Técnicos/profissionais pagam assinatura mensal para ter selo verificado
-- Aparecem em destaque nas respostas e no ranking de contribuidores
-- Gera confiança e visibilidade para o profissional
+| Componente | Uso | Formato |
+|------------|-----|---------|
+| `AdBanner.tsx` | Topo/rodapé de páginas | 728x90 / responsivo |
+| `AdInArticle.tsx` | Entre seções de conteúdo | 300x250 / nativo |
+| `AdSidebar.tsx` | Lateral em desktop | 300x600 / vertical |
 
-### Recomendação
+### 3. Script Loader
+**Arquivo:** `src/components/ads/AdSenseScript.tsx`
 
-A combinação mais eficaz seria: **Plano Premium (assinatura)** + **Consulta IA (créditos)** + **Guias digitais (compra única)**. Isso cria 3 fontes de receita complementares.
+Carrega o script do Google AdSense dinamicamente com o Publisher ID correto do nicho.
 
-### Implementação técnica
+---
 
-- **Pagamentos**: Stripe (já tem integração nativa no Lovable) ou Polar (Merchant of Record, cuida de impostos)
-- **Controle de acesso**: Feature flag via benefit grant (Stripe/Polar) + coluna `is_premium` ou check de subscription ativa
-- **IA**: Edge function usando Lovable AI (sem API key necessária)
-- **Entrega de conteúdo**: Storage bucket para PDFs/guias
+## Posicionamento dos Anúncios
 
-Qual dessas opções quer implementar primeiro?
+### Página Inicial (`Index.tsx`)
+- 1 banner após seção "Categorias"
+- 1 ad in-article antes da seção "Como funciona"
+
+### Página de Problema (`ProblemPage.tsx`)
+- 1 ad após "Resposta rápida"
+- 1 ad após os passos (antes de "Problemas relacionados")
+- 1 ad sidebar em desktop
+
+### Página de Categoria (`CategoryPage.tsx`)
+- 1 banner após lista de 3 problemas
+- 1 ad no final da página
+
+### Fórum (`ForumPage.tsx`)
+- 1 ad in-feed a cada 5 perguntas
+
+---
+
+## Configuração por Nicho
+
+A estrutura já existente em `src/config/niches/` será utilizada:
+
+```text
+monetization: {
+  adsenseId: 'ca-pub-XXXXX',  // ID único por nicho
+  affiliateLinks: {...},
+  leadCaptureEnabled: true,
+}
+```
+
+---
+
+## Arquivos a Criar/Modificar
+
+### Criar:
+1. `src/components/ads/AdUnit.tsx` - Componente base
+2. `src/components/ads/AdBanner.tsx` - Banner horizontal
+3. `src/components/ads/AdInArticle.tsx` - Ad nativo em conteúdo
+4. `src/components/ads/AdSidebar.tsx` - Ad vertical lateral
+5. `src/components/ads/AdSenseScript.tsx` - Loader do script
+6. `src/components/ads/index.ts` - Exports
+
+### Modificar:
+1. `src/components/layout/Layout.tsx` - Adicionar AdSenseScript
+2. `src/pages/Index.tsx` - Inserir ads nas posições
+3. `src/pages/ProblemPage.tsx` - Inserir ads nas posições
+4. `src/pages/CategoryPage.tsx` - Inserir ads nas posições
+5. `src/pages/ForumPage.tsx` - Inserir ads in-feed
+
+---
+
+## Detalhes Técnicos
+
+### Estrutura do AdUnit
+
+O componente base detectará o nicho e renderizará:
+
+```text
+┌─────────────────────────────────────┐
+│  [AdUnit]                           │
+│  - Detecta nicho via useNiche()     │
+│  - Pega adsenseId da config         │
+│  - Renderiza slot do Google Ads     │
+│  - Fallback: placeholder ou nada    │
+└─────────────────────────────────────┘
+```
+
+### Formatos Suportados
+
+| Formato | Dimensões | Uso |
+|---------|-----------|-----|
+| `banner` | 728x90, 320x50 (mobile) | Header/Footer |
+| `rectangle` | 300x250 | Conteúdo |
+| `vertical` | 300x600 | Sidebar |
+| `in-article` | Responsivo | Entre parágrafos |
+| `in-feed` | Nativo | Listas |
+
+### Responsividade
+
+Os ads serão adaptados para mobile:
+- Banner desktop (728x90) → mobile (320x50)
+- Sidebar oculta em mobile
+- In-article mantém proporção
+
+---
+
+## Considerações de Performance
+
+- Scripts carregados de forma assíncrona
+- Ads renderizados após conteúdo principal
+- Lazy loading para ads abaixo da dobra
+- Sem impacto em Core Web Vitals
 

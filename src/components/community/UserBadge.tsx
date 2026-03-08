@@ -15,7 +15,8 @@ export type BadgeType =
   | 'early_adopter' // First 100 users
   | 'trusted'       // Verified user
   | 'moderator'     // Mod role
-  | 'admin';        // Admin role
+  | 'admin'         // Admin role
+  | 'premium';      // Premium subscriber
 
 interface BadgeConfig {
   icon: LucideIcon;
@@ -90,6 +91,12 @@ const badgeConfigs: Record<BadgeType, BadgeConfig> = {
     label: 'Admin',
     color: 'text-red-500',
     bgColor: 'bg-red-500/10',
+  },
+  premium: {
+    icon: Crown,
+    label: 'Premium',
+    color: 'text-amber-600',
+    bgColor: 'bg-amber-500/15',
   },
 };
 

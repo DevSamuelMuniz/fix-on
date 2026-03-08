@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { useNiche } from '@/contexts/NicheContext';
+import { useSubscription } from '@/hooks/useSubscription';
 import { cn } from '@/lib/utils';
 
 export type AdFormat = 'banner' | 'rectangle' | 'vertical' | 'in-article' | 'in-feed';
@@ -21,6 +22,7 @@ const formatStyles: Record<AdFormat, { width: string; height: string }> = {
 
 export function AdUnit({ format, slot, className, responsive = true }: AdUnitProps) {
   const { niche } = useNiche();
+  const { isPremium } = useSubscription();
   const adRef = useRef<HTMLDivElement>(null);
   const isLoaded = useRef(false);
 
@@ -39,7 +41,8 @@ export function AdUnit({ format, slot, className, responsive = true }: AdUnitPro
     }
   }, [adsenseId]);
 
-  if (!adsenseId) {
+  // Premium users see no ads
+  if (!adsenseId || isPremium) {
     return null;
   }
 

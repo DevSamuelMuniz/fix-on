@@ -34,6 +34,8 @@ import PublicProfilePage from "./pages/PublicProfilePage";
 import InstallPage from "./pages/InstallPage";
 import ResetPasswordPage from "./pages/ResetPasswordPage";
 import NewPasswordPage from "./pages/NewPasswordPage";
+import PricingPage from "./pages/PricingPage";
+import PremiumSuccessPage from "./pages/PremiumSuccessPage";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -73,6 +75,8 @@ const App = () => (
             <Route path="/perfil" element={<ProfilePage />} />
             <Route path="/perfil/:userId" element={<PublicProfilePage />} />
             <Route path="/instalar" element={<InstallPage />} />
+            <Route path="/premium" element={<PricingPage />} />
+            <Route path="/premium/sucesso" element={<PremiumSuccessPage />} />
             <Route path="/recuperar-senha" element={<ResetPasswordPage />} />
             <Route path="/nova-senha" element={<NewPasswordPage />} />
             
