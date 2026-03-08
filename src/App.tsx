@@ -78,6 +78,7 @@ const App = () => (
             <Route path="/instalar" element={<InstallPage />} />
             <Route path="/premium" element={<PricingPage />} />
             <Route path="/premium/sucesso" element={<PremiumSuccessPage />} />
+            <Route path="/guias" element={<GuidesPage />} />
             <Route path="/recuperar-senha" element={<ResetPasswordPage />} />
             <Route path="/nova-senha" element={<NewPasswordPage />} />
             
