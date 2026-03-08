@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { useNiche } from '@/contexts/NicheContext';
+import { useSubscription } from '@/hooks/useSubscription';
 import { cn } from '@/lib/utils';
 
 export type AdFormat = 'banner' | 'rectangle' | 'vertical' | 'in-article' | 'in-feed';
