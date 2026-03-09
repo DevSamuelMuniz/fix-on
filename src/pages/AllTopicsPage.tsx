@@ -359,9 +359,11 @@ export default function AllTopicsPage() {
                           <Eye className="h-3 w-3" />
                           {topic.view_count || 0}
                         </span>
-                      </div>
+                       </div>
                     </div>
                   </Link>
+                    );
+                  })()}
                 </motion.div>
               ))}
             </div>
