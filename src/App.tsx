@@ -115,6 +115,7 @@ const App = () => (
       </TooltipProvider>
     </NicheProvider>
   </QueryClientProvider>
+  </ThemeProvider>
 );
 
 export default App;
