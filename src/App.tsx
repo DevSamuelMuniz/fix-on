@@ -58,7 +58,7 @@ if (typeof window !== 'undefined') {
 }
 
 const App = () => (
-  <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
+  <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false} storageKey="fixon-theme" disableTransitionOnChange>
     <QueryClientProvider client={queryClient}>
       <NicheProvider>
       <TooltipProvider>
