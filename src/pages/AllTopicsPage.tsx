@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { 
   MessageCircle, Plus, Clock, CheckCircle2, Pin, ChevronRight, 
-  ArrowLeft, Eye, Filter, X, Hash, FolderOpen, Calendar,
-  SortAsc, SortDesc, Search
+  ArrowLeft, Eye, X, Hash, FolderOpen,
+  SortDesc, Search, Crown
 } from 'lucide-react';
 import { Layout } from '@/components/layout/Layout';
 import { Button } from '@/components/ui/button';
@@ -16,6 +16,7 @@ import { UserAvatar } from '@/components/UserAvatar';
 import { useCategories } from '@/hooks/useCategories';
 import { useForumQuestions } from '@/hooks/useForum';
 import { useAuth } from '@/hooks/useAuth';
+import { usePremiumUsers } from '@/hooks/usePremiumUsers';
 import { cn } from '@/lib/utils';
 
 function formatTimeAgo(dateString: string): string {
