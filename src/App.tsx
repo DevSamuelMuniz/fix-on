@@ -6,6 +6,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "next-themes";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { NicheProvider } from "@/contexts/NicheContext";
+import { useAuth } from "@/hooks/useAuth";
+import { useThemeSync } from "@/hooks/useThemeSync";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import CategoryPage from "./pages/CategoryPage";
